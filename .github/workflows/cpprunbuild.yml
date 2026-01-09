@@ -20,7 +20,7 @@ jobs:
 
       - name: Build
         run: |
-          g++ -std=c++17 -O2 -Wall -Wextra reponame.cpp -o reponame
+          g++ -std=c++17 -O2 -Wall -Wextra src/reponame.cpp -o reponame
 
       - name: Run
         run: |
