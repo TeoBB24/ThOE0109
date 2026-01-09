@@ -1,0 +1,26 @@
+name: C++ Build and Run
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Show compiler version
+        run: g++ --version
+
+      - name: Build C++ program
+        run: |
+          g++ reponame.cpp -o reponame
+
+      - name: Run program
+        run: |
+          ./reponame
