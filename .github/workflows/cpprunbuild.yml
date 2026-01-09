@@ -1,26 +1,20 @@
-name: C++ Build and Run
+name: C++ CI
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push]
 
 jobs:
-  build-and-run:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
-      - name: Show compiler version
-        run: g++ --version
+      - name: Install compiler
+        run: sudo apt-get update && sudo apt-get install -y g++
 
-      - name: Build C++ program
-        run: |
-          g++ reponame.cpp -o reponame
+      - name: Build
+        run: g++ -std=c++17 -O2 -Wall -Wextra reponame.cpp -o reponame
 
-      - name: Run program
-        run: |
-          ./reponame
+      - name: Run
+        run: ./reponame
+
