@@ -1,5 +1,4 @@
-name: C++ CI
-
+name: Go
 on: [push]
 
 jobs:
@@ -7,14 +6,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install compiler
-        run: sudo apt-get update && sudo apt-get install -y g++
-
+      - uses: actions/checkout@v5
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21.x'
+      - name: Install dependencies
+        run: go get .
       - name: Build
-        run: g++ -std=c++17 -O2 -Wall -Wextra reponame.cpp -o reponame
-
-      - name: Run
-        run: ./reponame
-
+        run: go build -v ./reponame.cpp
+      - name: Test with the Go CLI
+        run: go test
